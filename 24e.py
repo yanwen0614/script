@@ -80,7 +80,7 @@ def battle():
     # round 2
     print("round 3")
 
-    uts.fair(round_aim[1])
+    uts.fairy(round_aim[1])
 
     uts.plainTask()
     uts.click_aim(round_aim[1])

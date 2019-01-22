@@ -68,7 +68,7 @@ def select_campaign(campaign_num):
             campaign_num-=1
     randomclick(local)
 
-
+    
 def select_battle(battle_num):
     local = [700,365,800,100]
     if battle_num<5:
@@ -90,15 +90,15 @@ def select_battle(battle_num):
         randomclick(local)
 
 
-def fair(aim_cenrtel):
-    pyautogui.moveTo(random_cyclic(aim_cenrtel, maxr=30))
-    pyautogui.click()
+def fairy(aim_cenrtel):
+    #pyautogui.moveTo(random_cyclic(aim_cenrtel, maxr=30))
+    #pyautogui.click()
     sleep(0.5+random.random()/2)
     local = (1730,580,123,43)
     randomclick(local)
     sleep(0.5+random.random()/2)
-    pyautogui.moveTo(random_cyclic(aim_cenrtel, maxr=30))
-    pyautogui.click()
+    #pyautogui.moveTo(random_cyclic(aim_cenrtel, maxr=30))
+    #pyautogui.click()
     sleep(0.5+random.random()/2)
 
 
@@ -114,6 +114,10 @@ def select_n():
     local = (1725,250,128,71)
     randomclick(local,sg=3)
 
+def campaign_scroll():
+    pyautogui.moveTo(440, 950, duration=0.25)
+    pyautogui.dragRel(0,-800,duration=1)
+    return scrolln
 
 def entry_mission():
     local = (1030,810,190,96)
@@ -126,7 +130,7 @@ def addamry(centre):
     randomclick([centre[0]+15,centre[1]-35,225,60] ,sg=5)
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     checkamry()
-
+    
 
 def start_mission():
     local = (1645,887,215,110)
@@ -200,6 +204,13 @@ def check_into_amry_editor():
         return True
     return False
 
+def check_into_echelon_formation():
+    photo = "echelon_formation.bmp"
+    x = pyautogui.locateOnScreen(photo)
+    if x:
+        return True
+    return False
+
 
 def repair(stacknum):
     lcl = [300,250,230,600]
@@ -231,9 +242,10 @@ def restart():
     restart = [668,688,205,65]
     randomclick(restart)
 
-def army_back(clickfuntion):
-    clickfuntion()
-    sleep(0.2+abs(random.normalvariate(0.2, 0.1)))
+def army_back(clickfuntion,isselect=False):
+    if not isselect:
+        clickfuntion()
+        sleep(0.2+abs(random.normalvariate(0.2, 0.1)))
     clickfuntion()
     sleep(0.4+abs(random.normalvariate(0.2, 0.1)))
     backbtn = [1377,904,220,80]
@@ -242,9 +254,15 @@ def army_back(clickfuntion):
     surebtn = [1021,687,220,80]
     randomclick(surebtn)
 
-def checkisload():
+def checkisload(): 
     x = get_color(pos=(1656,923))
-    if x != 57855:
+    if x != 58111:
+        return False
+    return True
+
+def planend(pos):
+    x = uts.get_color(pos)
+    if x != 13360495:
         return False
     return True
 

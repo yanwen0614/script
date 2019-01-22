@@ -35,6 +35,7 @@ def change_battler(battle_num,  start):
     uts.amry_editor()
     while 1:
         sleep(0.3)
+        print("check_into_amry_editor")
         if uts.check_into_amry_editor():
             break
     sleep(0.5+abs(random.normalvariate(0.3,  0.1)))
@@ -44,10 +45,9 @@ def change_battler(battle_num,  start):
         uts.randomclick(army_label)
         sleep(0.5+abs(random.normalvariate(0.3,  0.1)))
 
-
     formation_editor =  [1618, 911, 240, 70]
     uts.randomclick(formation_editor)
-    sleep(0.3+abs(random.normalvariate(1,  0.2)))
+    sleep(0.8+abs(random.normalvariate(1,  0.2)))
 
     formation_preset = [1785 , 365,  95,  110]
     uts.randomclick(formation_preset)
@@ -59,7 +59,7 @@ def change_battler(battle_num,  start):
     else:
         pre_formation[1]+=175
         uts.randomclick(pre_formation)
-    sleep(0.4+abs(random.normalvariate(1,  0.2)))
+    sleep(0.8+abs(random.normalvariate(1,  0.2)))
 
     use_preset = [1515, 860, 320, 125]
     uts.randomclick(use_preset)
@@ -67,7 +67,7 @@ def change_battler(battle_num,  start):
         uts.randomclick([863, 590, 60, 60])
         start = 0
     uts.randomclick(use_preset)
-    sleep(0.3+abs(random.normalvariate(1,  0.2)))
+    sleep(0.8+abs(random.normalvariate(1,  0.2)))
 
     sure = [1605, 855, 225, 140]
     uts.randomclick(sure)
@@ -108,7 +108,7 @@ def change_battler(battle_num,  start):
 
 
 def round1end():
-    x = uts.get_color(pos=(940, 270))
+    x = uts.get_color(pos=(940, 265))
     if x != 13360495:
         return False
     return True
@@ -125,7 +125,7 @@ def mistake(error_coor, correct_coor):
     """ 
     para: error_coor,correct_coor
     """
-    if random.random()>random.normalvariate(0.80, 0.05):
+    if random.random()>random.normalvariate(0.96, 0.05):
         print("mistake")
         uts.click_aim(error_coor)
         sleep(0.456+abs(random.normalvariate(0.2, 0.1)))
@@ -134,7 +134,7 @@ def mistake(error_coor, correct_coor):
         uts.click_aim(error_coor)
 
 
-def battle(start, battle_num):
+def battle(start, battle_num,fairy_state,nodelay):
     entry02()
     sleep(5+random.random())
 
@@ -154,12 +154,14 @@ def battle(start, battle_num):
 
     print("round 1")
 
-    if random.random()>0.35:
-        if battle_num == 0:
-            uts.fair(locoal_commd)
-            sleep(0.456+abs(random.normalvariate(0.2, 0.1)))
-    
-    sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
+    """
+    if (battle_num ==0 or fairy_state == 0) or (battle_num ==1 or fairy_state == 1):
+        fairy_state = (fairy_state+1)%2
+        uts.fairy(locoal_commd)
+        sleep(0.656+abs(random.normalvariate(0.2, 0.1)))
+    """
+
+    sleep(0.631+abs(random.normalvariate(0.2, 0.1)))
 
     uts.plainTask()
 
@@ -190,7 +192,7 @@ def battle(start, battle_num):
 
 
     sleep(0.5+random.random()/2)
-    uts.start_plain()
+    uts.start_plain()   
 
     basic_delay = 110+random.normalvariate(5, 10)
     print("basic_delay",basic_delay)
@@ -208,7 +210,8 @@ def battle(start, battle_num):
     print("radnum_round1",radnum)
    
     delaytime = 0
-    
+    if nodelay:
+        radnum = 0
     if radnum >0.999:
         delaytime = 180+abs(random.normalvariate(20, 80))
     elif radnum >0.9848:
@@ -233,10 +236,7 @@ def battle(start, battle_num):
             sleep(random.randint(1,3)+random.random())
     # round 2
     print("round 2")
-    if random.random() > 0.21 :
-        if battle_num == 0:
-            uts.fair(round2_aim[0])
-            sleep(0.456+abs(random.normalvariate(0.2, 0.1)))    
+    sleep(random.randint(1,3)+random.random()) 
     
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.plainTask()
@@ -263,7 +263,8 @@ def battle(start, battle_num):
     print("radnum_round2",radnum)
    
     delaytime = 0
-    
+    if nodelay:
+        radnum = 0
     if radnum >0.99:
         delaytime = 180+abs(random.normalvariate(20, 80))
     elif radnum >0.9648:
@@ -282,7 +283,7 @@ def battle(start, battle_num):
     for i in range(4):
         uts.end_click()
         sleep(0.5+abs(random.normalvariate(2, 2)/5))
-    return start, battle_num
+    return start, battle_num,fairy_state
 
 
 def roundgap():
@@ -301,15 +302,15 @@ def roundgap():
     sleep(1.5+abs(random.normalvariate(2, 5)))
 
 
-def autobattle(num, start, battle_num ):
+def autobattle(num, start, battle_num,fairy_state,nodelay ):
     sleep(2)
     for i in range(num):
         print(i+1, "turn")
-        start, battle_num = battle(start, battle_num)
-        sleep(1+random.normalvariate(2, 2)/5)
+        start, battle_num,fairy_state = battle(start, battle_num,fairy_state,nodelay)
+        sleep(1+abs(random.normalvariate(2, 2)/5))
         roundgap()
         battle_num += 1
-        battle_num = battle_num % 2
+        battle_num = battle_num % 2  
     return battle_num, start
 
 
@@ -318,10 +319,15 @@ if __name__ == '__main__':
     start, battler_num, loop_num = int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
     print("start,battle_num:", start, battler_num, sep=",") 
     t = time()
-    battler_num, start = autobattle(loop_num, start, battler_num)
+    fairy_state,nodelay = 0.0,1
+    battler_num, start = autobattle(loop_num, start, battler_num,fairy_state,nodelay)
     print(time()-t)
     print(datetime.now())
     print("start,battle_num:", start, battler_num, sep=",") 
-    if random.random()>0.4:
+    if random.random()>0.0:
         quit2battle = [90,40,170,115]
         uts.randomclick(quit2battle)
+
+"""127.0.0.1		    localhost
+204.246.56.80 adr.transit.gf.ppgame.com
+218.11.1.163 ios.transit.gf.ppgame.com"""

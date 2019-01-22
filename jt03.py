@@ -8,7 +8,6 @@ locoal_commd = [1282, 812]  #[1315,660,225,60    ]
 airport = [443,795]
 
 go_aim = [(1110,625),(945,468)]
-back_aim = [(945,538),(1110,695), (1282,882)]
 
 
 def clickairport():
@@ -26,13 +25,6 @@ def entry01():
     sleep(0.63+random.random()/2)
     enrtylocal = (875,795,210,100)
     uts.randomclick(enrtylocal)
-
-
-def emeryroundend():
-    x = uts.get_color(pos=(1525,950))
-    if x != 436990:
-        return False
-    return True
 
 def planend(pos):
     x = uts.get_color(pos)

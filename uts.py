@@ -261,7 +261,7 @@ def checkisload():
     return True
 
 def planend(pos):
-    x = uts.get_color(pos)
+    x = get_color(pos)
     if x != 13360495:
         return False
     return True

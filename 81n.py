@@ -20,6 +20,10 @@ def clicklocoal_commd(locoal_commd=locoal_commd):
     pyautogui.moveTo(*uts.random_cyclic(locoal_commd, maxr=50))
     pyautogui.click()
 
+def clicklocoal_commd__(locoal_commd=locoal_commd_after_scroll):
+    pyautogui.moveTo(*uts.random_cyclic(locoal_commd, maxr=50))
+    pyautogui.click()
+
 
 
 def entry01():
@@ -70,6 +74,7 @@ def change_battler(battle_num):
     sleep(0.531+abs(random.normalvariate(0.2,  0.1)))
     while 1:
         sleep(0.5)
+        print("check_into_amry_editor")
         if uts.check_into_amry_editor():
             break
     # 
@@ -88,9 +93,10 @@ def change_battler(battle_num):
     uts.randomclick(dolllist[1])
     #换人
 
-    sleep(0.431+abs(random.normalvariate(0.2,  0.1)))
+    sleep(0.5+abs(random.normalvariate(0.2,  0.1)))
     while 1:
         sleep(0.5)
+        print("check_into_amry_editor")
         if uts.check_into_amry_editor():
             break
     
@@ -132,7 +138,7 @@ def battle(battle_num):
     sleep(1.331+abs(random.normalvariate(0.2, 0.1)))
     uts.start_mission()
     sleep(4.431+abs(random.normalvariate(0.2, 0.1)))
-    uts.supply(clicklocoal_commd(locoal_commd=locoal_commd_after_scroll))
+    uts.supply(clicklocoal_commd__)
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     
     isload = False
@@ -141,7 +147,7 @@ def battle(battle_num):
         print("supplying")
         sleep(0.3)
 
-    uts.army_back(clicklocoal_commd(locoal_commd=locoal_commd_after_scroll))
+    uts.army_back(clicklocoal_commd__,isselect=True)
     sleep(1.431+abs(random.normalvariate(0.2, 0.1)))
 
     uts.plainTask()
@@ -159,7 +165,6 @@ def battle(battle_num):
         else:
             print("No")
             sleep(random.randint(1,3)+random.random())
-    
     uts.restart()  # restart mission
 
 
@@ -182,12 +187,13 @@ def autobattle(num,battler):
 
 if __name__ == '__main__':
     import sys
-    loop_num= int(sys.argv[1])
-    battler = int(sys.argv[2])
+    loop_num= 5#int(sys.argv[1])
+    battler = 0#int(sys.argv[2])
     t = time()
-    autobattle(loop_num,battler)
+    battler = autobattle(loop_num,battler)
     print(time()-t)
     print(datetime.now())
+    print(battler)
     if random.random()>0.4:
         quit2battle = [90,40,170,115]
         uts.randomclick(quit2battle)

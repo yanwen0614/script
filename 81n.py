@@ -55,7 +55,7 @@ def change_battler(battle_num):
     sleep(0.5+abs(random.normalvariate(0.3,  0.1)))
     # 进入梯队编辑 补给队
 
-    doll1 = [295,200,227,801] # 260
+    doll1 = [295,200,227,801-175] # 260
     uts.randomclick(doll1)
     sleep(1+abs(random.normalvariate(0.6,  0.2)))
     # 选择第一个人形
@@ -137,7 +137,13 @@ def battle(battle_num):
 
     sleep(1.331+abs(random.normalvariate(0.2, 0.1)))
     uts.start_mission()
-    sleep(4.431+abs(random.normalvariate(0.2, 0.1)))
+    sleep(5.431+abs(random.normalvariate(0.2, 0.1)))
+    isload = False
+    while not isload:
+        isload = uts.checkisload()
+        print("loading")
+        sleep(0.3)
+
     uts.supply(clicklocoal_commd__)
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     
@@ -157,7 +163,7 @@ def battle(battle_num):
         sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
         uts.click_aim(aim, maxr=30)
     uts.start_plain()
-    sleep(55+abs(random.normalvariate(10, 5)))
+    sleep(65+abs(random.normalvariate(20, 10)))
     while 1:
         if uts.planend(pos=(651,519)):
             print("Yes")
@@ -180,6 +186,7 @@ def autobattle(num,battler):
         #roundgap()
         battler +=1 
         battler = battler%2
+        
     return battler
 
 
@@ -187,13 +194,17 @@ def autobattle(num,battler):
 
 if __name__ == '__main__':
     import sys
-    loop_num= 5#int(sys.argv[1])
-    battler = 0#int(sys.argv[2])
+    loop_num= int(sys.argv[1])
+    battler = int(sys.argv[2])
     t = time()
     battler = autobattle(loop_num,battler)
+
+
+    quit2battle = [90,40,170,115]
+    uts.randomclick(quit2battle)
+    sleep(3+abs(random.normalvariate(0.1,  0.2)))
+    uts.randomclick(quit2battle)
+
     print(time()-t)
     print(datetime.now())
     print(battler)
-    if random.random()>0.4:
-        quit2battle = [90,40,170,115]
-        uts.randomclick(quit2battle)

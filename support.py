@@ -34,16 +34,25 @@ def reorder_support():
             uts.random_cyclic((1330,505),200) 
         else:
             uts.random_cyclic((1200,511),200) 
-    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
-    uts.randomclick([1017,685,230,80])
-    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+        sleep(1.8+abs(random.normalvariate(0.2, 0.1)))
+        uts.randomclick([1017,685,220,80])
+        sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+        uts.randomclick([1017,685,220,80])  
+        return True
+    return False
 
 def auto_support(gap_min):
-    while 1:
-        sleep(gap_min*60+abs(random.normalvariate(gap_min*10,gap_min)))
+    tag = 1
+    while tag:
+        sleeptime = gap_min*60+abs(random.normalvariate(gap_min*10,gap_min*5))
+        
         for i in range(4):
-            reorder_support()
-            check_main_frame()
+            if reorder_support():
+                check_main_frame()
+        print(tag)
+        print(sleeptime)
+        tag+=1
+        sleep(sleeptime)
 
 if __name__ == "__main__":
     auto_support(0.5)

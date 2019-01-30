@@ -183,7 +183,7 @@ def checkinbattle():
     else:
         return False
 
-def checkEndPlain():
+def checkEndPlan():
     c = get_color(pos=(290,880))
     if c == 16777215:
         return True

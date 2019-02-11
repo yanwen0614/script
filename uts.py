@@ -142,9 +142,7 @@ def checkamry(): # 梯队确认
     local = (1637,907,212,72)
     randomclick(local)
 
-def plainTask():
-    local = (92,840,190,44)
-    randomclick(local,sg=3)
+
 
 def start_plain():
     local = (1645,900,215,110)
@@ -175,6 +173,13 @@ def get_color(pos=(1656,923)): #50175  25731  57855
     hdc_screen = win32gui.CreateDC("DISPLAY", "", None)
     return win32gui.GetPixel(hdc_screen,*pos)
 
+def plainTask():
+    local = (92,840,190,44)
+    while 1:
+        randomclick(local,sg=3)
+        sleep(0.2)
+        if get_color((261,879)) == 46847 and get_color((281,882)) == 46847:
+            break
 
 def checkinbattle():
     c = get_color(pos=(943,50))
@@ -265,6 +270,18 @@ def planend(pos):
     if x != 13360495:
         return False
     return True
+
+def scroll_y(sroll_dy):
+    sroll_y = sroll_dy
+    loop = (sroll_dy/3) if (sroll_dy/3)>200 else 200
+    while sroll_y > 0:  
+        x = random.normalvariate(1300, 100)
+        y = random.normalvariate(300, 30)
+        pyautogui.moveTo(x, y, duration=0.25)
+        dx = random.normalvariate(50, 20)
+        dy = loop+abs(random.normalvariate(sroll_dy/6, 50))
+        pyautogui.dragRel(-dx,dy,duration=1+random.random())
+        sroll_y -= dy
 
 if __name__ == '__main__':
     get_color()

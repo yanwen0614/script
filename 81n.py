@@ -148,10 +148,13 @@ def battle(battle_num):
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     
     isload = False
+    print("supplying",end="")
     while not isload:
         isload = uts.checkisload()
-        print("supplying")
+        print(".",end="")
         sleep(0.3)
+    print(".")
+
 
     uts.army_back(clicklocoal_commd__,isselect=True)
     sleep(1.431+abs(random.normalvariate(0.2, 0.1)))
@@ -165,12 +168,17 @@ def battle(battle_num):
     uts.start_plain()
     sleep(65+abs(random.normalvariate(20, 10)))
     while 1:
+        first_no = True
         if uts.planend(pos=(651,519)):
             print("Yes")
             break
         else:
-            print("No")
+            if first_no:
+                print("No",end="")
+            else:
+                print(".",end="")
             sleep(random.randint(1,3)+random.random())
+    print(".")
     uts.restart()  # restart mission
 
 

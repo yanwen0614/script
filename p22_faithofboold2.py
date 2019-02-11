@@ -21,8 +21,8 @@ def clicklocoal_commd():
     pyautogui.click()
 
 
-def round1end():
-    x = uts.get_color(pos=(940, 265))
+def roundend(pos):
+    x = uts.get_color(pos=pos)
     if x != 13360495:
         return False
     return True
@@ -43,8 +43,6 @@ def battle():
     uts.checkamry()
     sleep(.631+abs(random.normalvariate(0.2, 0.1)))
     # 在左下机场下补给队
-
-
 
     sleep(.631+abs(random.normalvariate(0.2, 0.1)))
     clickairport()
@@ -87,7 +85,7 @@ def battle():
     sleep(basic_delay)
     print("judge round1end...")
     while 1:
-        if uts.checkEndPlan():
+        if roundend((795,496)):
             print("Yes")
             break
         else:
@@ -99,25 +97,25 @@ def battle():
     sleep(0.41+abs(random.normalvariate(0.2, 0.1)))
     backbtn = [840-240,750-30,225,60]
     uts.randomclick(backbtn)
-    sleep(0.4+abs(random.normalvariate(0.2, 0.1)))
+    sleep(2.2+abs(random.normalvariate(0.2, 0.1)))
 
     uts.plainTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(round1_aim_2)
     sleep(0.5+random.random()/2)
     uts.start_plain()   
-    basic_delay = 15+random.normalvariate(5, 10)
+    basic_delay = 15+abs(random.normalvariate(5, 10))
     print("basic_delay",basic_delay)
     sleep(basic_delay)
-    print("judge round1end...")
+    print("judge round1_2end...")
     while 1:
-        if uts.checkEndPlan():
+        if roundend((1016,503)):
             print("Yes")
             break
         else:
             print("No")
             sleep(random.randint(1,3)+random.random())
-
+    sleep(random.randint(1,3)+random.random()) 
 
     print("emeary turn")
     uts.start_mission() # end mission
@@ -134,8 +132,8 @@ def battle():
                 sleep(2)
                 for i in range(4):
                     sleep(0.5)
-                    x = random.normalvariate(900, 300)
-                    y = random.normalvariate(550, 200)
+                    x = random.normalvariate(900, 50)
+                    y = random.normalvariate(550, 50)
                     if y<40:
                         y+=40
                     if x<154:
@@ -147,7 +145,7 @@ def battle():
     sleep(3.5)
     # round 2
     print("round 2")
-    sleep(random.randint(1,3)+random.random()) 
+    sleep(3+random.random()) 
     
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.plainTask()
@@ -156,9 +154,11 @@ def battle():
         sleep(0.5+random.random()/2)
         uts.click_aim(aim)
     uts.start_plain()
+    
     print("start plain")
+    sleep(30)
     while 1:
-        if uts.checkEndPlan():
+        if roundend((1156,388)):
             print("Yes")
             break
         else:
@@ -169,8 +169,8 @@ def battle():
 
 if __name__ == '__main__':
     import sys
-    loop_num= int(sys.argv[1])
-   
+    loop_num = 5 # int(sys.argv[1])
+    sleep(3+abs(random.normalvariate(0.1,  0.2)))
     t = time()
     for i in range(loop_num):
         battle()

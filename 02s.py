@@ -151,7 +151,7 @@ def battle(start, battle_num,fairy_state,nodelay):
         isload = uts.checkisload()
         print("supplying")
         sleep(0.3)
-
+    #uts.army_back(clickairport, isselect=True)
     print("round 1")
 
     """
@@ -180,15 +180,7 @@ def battle(start, battle_num,fairy_state,nodelay):
         uts.click_aim(aim)
         sleep(0.5+random.random()/2)
         if step ==0:
-            sroll_y = 800
-            while sroll_y > 0:  
-                x = random.normalvariate(1300, 100)
-                y = random.normalvariate(300, 30)
-                pyautogui.moveTo(x, y, duration=0.25)
-                dx = random.normalvariate(50, 20)
-                dy = random.normalvariate(400, 50)
-                pyautogui.dragRel(-dx,dy,duration=1+random.random())
-                sroll_y -= dy
+            uts.scroll_y(800)
 
 
     sleep(0.5+random.random()/2)
@@ -284,6 +276,8 @@ def battle(start, battle_num,fairy_state,nodelay):
         uts.end_click()
         sleep(0.5+abs(random.normalvariate(2, 2)/5))
     return start, battle_num,fairy_state
+
+
 
 
 def roundgap():

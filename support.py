@@ -44,7 +44,7 @@ def reorder_support():
 def auto_support(gap_min):
     tag = 1
     while tag:
-        sleeptime = gap_min*60+abs(random.normalvariate(gap_min*10,gap_min*5))
+        sleeptime = gap_min*60+abs(random.normalvariate(gap_min*8,gap_min*5))
         
         for i in range(4):
             if reorder_support():
@@ -55,4 +55,4 @@ def auto_support(gap_min):
         sleep(sleeptime)
 
 if __name__ == "__main__":
-    auto_support(0.5)
+    auto_support(0.6)

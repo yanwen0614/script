@@ -60,7 +60,7 @@ def battle():
     sleep(1.431+abs(random.normalvariate(0.2, 0.1)))
 
     print("round 1")
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     clicklocoal_commd()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
@@ -76,7 +76,7 @@ def battle():
             print("yes")
             break
         sleep(1)
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     for aim in back_aim:
     

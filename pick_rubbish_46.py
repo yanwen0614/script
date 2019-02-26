@@ -54,7 +54,7 @@ def battle():
 
     sleep(0.631+abs(random.normalvariate(0.2, 0.1)))
 
-    uts.plainTask()
+    uts.planTask()
 
     sleep(0.483+abs(random.normalvariate(0.2, 0.1)))
     clickairport()
@@ -71,6 +71,7 @@ def battle():
 
     uts.start_plain()   
     sleep(6)
+    tag = 0
     while 1:
         if round1end():
             sleep(2.5)
@@ -83,10 +84,16 @@ def battle():
             sleep(9)
             break
         sleep(0.3)
+        tag+=1
+        if tag > 180:
+            x = random.normalvariate(900, 300)
+            y = random.normalvariate(550, 200)
+            pyautogui.moveTo(x, y, duration=0.25)
+            pyautogui.click()
     sleep(1.5+random.random()/2)
 
 
-
+    
     print("restart mission")
     uts.restart()  # restart mission
 
@@ -96,6 +103,7 @@ def autobattle(loop_num):
     sleep(2)
     for i in range(loop_num):
         print(i+1, "turn")
+        uts.checkload(uts.check_restart, "check start")
         battle()
         sleep(2+abs(random.normalvariate(2, 2)/5))
 

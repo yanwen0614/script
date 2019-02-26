@@ -6,9 +6,11 @@ import random
 from math import sin,cos,pi
 from numpy.linalg import cholesky
 from time import sleep
+from sys import stdout
 
 
 def click_aim(aim_cenrtel, maxr=40):
+    """随机点击 aim_cenrtel为圆心坐标"""
     pyautogui.moveTo(*random_cyclic(aim_cenrtel, maxr=maxr))
     pyautogui.click()
 
@@ -164,18 +166,21 @@ def amry_editor():
 def main():
     n = 100
     while n:
-        plainTask()
+        planTask()
         n -=1
         sleep(1)
 
 def get_color(pos=(1656,923)): #50175  25731  57855
 
     hdc_screen = win32gui.CreateDC("DISPLAY", "", None)
-    return win32gui.GetPixel(hdc_screen,*pos)
+    c = win32gui.GetPixel(hdc_screen,*pos)
+    del hdc_screen
+    return c
 
-def plainTask():
+def planTask(max_try=10):
+    """ para: max_try default 10"""
     local = (92,840,190,44)
-    while 1:
+    for i in range(max_try):
         randomclick(local,sg=3)
         sleep(0.2)
         if get_color((261,879)) == 46847 and get_color((281,882)) == 46847:
@@ -189,11 +194,14 @@ def checkinbattle():
         return False
 
 def checkEndPlan():
-    c = get_color(pos=(290,880))
-    if c == 16777215:
+    """ 通过判断计划任务按钮"""
+    c1 = get_color(pos=(290,880))  # 计划模式按钮颜色
+    c2 = get_color(pos=(155,1015))  # 下方铁血标识颜色
+    if c1 == 16777215 and c2==5046512:
         return True
     else:
         return False
+
 
 def is_returnbattlemeun():
     photo = "battlemeun.bmp"
@@ -202,8 +210,34 @@ def is_returnbattlemeun():
         return True
     return False
 
+def checkload(function,descption : str,basic_delaytime=2):
+    """检查载入的函数  
+        para： function 判断的函数 载入了为True
+               descption 当前判断的描述
+               basic_delaytime 基本延迟时间
+               """
+
+    print(descption,end="")
+    sleep(basic_delaytime)
+    while 1:
+        sleep(0.5)
+        print(".",end="")
+        stdout.flush()
+        if function():
+            break
+    print(".")
+
+    
+
 def check_into_amry_editor():
     photo = "return_w.bmp"
+    x = pyautogui.locateOnScreen(photo)
+    if x:
+        return True
+    return False
+
+def check_restart():
+    photo = "startbattle.bmp"
     x = pyautogui.locateOnScreen(photo)
     if x:
         return True
@@ -247,7 +281,12 @@ def restart():
     restart = [668,688,205,65]
     randomclick(restart)
 
-def army_back(clickfuntion,isselect=False):
+def army_back(clickfuntion_or_coor,isselect=False):
+    """ clickfuntion_or_coor 点击函数或者中心坐标 """
+    if isinstance(clickfuntion_or_coor,tuple):
+        clickfuntion = lambda : click_aim(clickfuntion_or_coor)
+    else:
+        clickfuntion = clickfuntion_or_coor
     if not isselect:
         clickfuntion()
         sleep(0.2+abs(random.normalvariate(0.2, 0.1)))
@@ -265,23 +304,73 @@ def checkisload():
         return False
     return True
 
-def planend(pos):
+def PlanEnd(pos):
+    """
+    通过判断血条位置（通过颜色）
+    """
     x = get_color(pos)
     if x != 13360495:
         return False
     return True
 
 def scroll_y(sroll_dy):
-    sroll_y = sroll_dy
-    loop = (sroll_dy/3) if (sroll_dy/3)>200 else 200
+    """  传入正 鼠标按住向上"""
+    sroll_y = abs(sroll_dy)
+    sig = sroll_y/sroll_dy
+    loop = (sroll_y/3) if (sroll_y/3)>200 else 200
+    loop = loop*sig
     while sroll_y > 0:  
+        x = random.normalvariate(1000, 100)
+        y = random.normalvariate(400, 30)
+        pyautogui.moveTo(x, y, duration=0.25)
+        dx = random.normalvariate(50, 20)
+        dy = loop+sig*abs(random.normalvariate(sroll_dy/6, 50))
+        pyautogui.dragRel(-dx,dy,duration=1+random.random())
+        sroll_y -= abs(dy)
+
+def scroll_x(sroll_dx):
+    """ 鼠标按住向左"""
+    sroll_x = abs(sroll_dx)
+    sig = sroll_x/sroll_dx
+    loop = (sroll_x/3) if (sroll_x/3)>200 else 200
+    loop = loop*sig
+    while sroll_x > 0:  
         x = random.normalvariate(1300, 100)
         y = random.normalvariate(300, 30)
         pyautogui.moveTo(x, y, duration=0.25)
-        dx = random.normalvariate(50, 20)
-        dy = loop+abs(random.normalvariate(sroll_dy/6, 50))
+        dy = random.normalvariate(50, 20)
+        dx = loop+sig*abs(random.normalvariate(sroll_dx/6, 50))
         pyautogui.dragRel(-dx,dy,duration=1+random.random())
-        sroll_y -= dy
+        sroll_x -= abs(dx)
+
+def EmeryTurnFunc(sleeptime = 6):
+    """敌方回合调用函数，用于处理自动遇敌等问题"""
+    def emeryroundend():
+        x = get_color(pos=(1525,950))
+        if x != 436990:
+            return False
+        return True
+        print("emeary turn")
+    sleep(sleeptime)
+    while 1:
+        if emeryroundend():
+            print("Yes")
+            break
+        if checkinbattle():
+            sleep(0.3)
+            while checkinbattle():
+                sleep(0.3)
+            else:
+                sleep(2)
+                for i in range(4):
+                    sleep(0.5)
+                    x = random.normalvariate(900, 300)
+                    y = random.normalvariate(550, 200)
+                    pyautogui.moveTo(x, y, duration=0.25)
+                    pyautogui.click()
+                    sleep((0.383+abs(random.normalvariate(0.2, 0.1))))
+        sleep(0.3)
+    sleep(3.5)
 
 if __name__ == '__main__':
     get_color()

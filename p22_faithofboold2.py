@@ -72,7 +72,7 @@ def battle():
 
     sleep(0.631+abs(random.normalvariate(0.2, 0.1)))
 
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     for aim in round1_aim:
         sleep(0.5+random.random()/2)
@@ -93,13 +93,13 @@ def battle():
             sleep(random.randint(1,3)+random.random())
 
     # 救援人质
-    uts.click_aim((841,750))  # 人质位置
+    uts.click_aim((841,750),maxr=30)  # 人质位置
     sleep(0.41+abs(random.normalvariate(0.2, 0.1)))
     backbtn = [840-240,750-30,225,60]
     uts.randomclick(backbtn)
-    sleep(2.2+abs(random.normalvariate(0.2, 0.1)))
+    sleep(2.5+abs(random.normalvariate(0.2, 0.1)))
 
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(round1_aim_2)
     sleep(0.5+random.random()/2)
@@ -113,7 +113,7 @@ def battle():
             print("Yes")
             break
         else:
-            print("No")
+            print("No",end="")
             sleep(random.randint(1,3)+random.random())
     sleep(random.randint(1,3)+random.random()) 
 
@@ -148,7 +148,7 @@ def battle():
     sleep(3+random.random()) 
     
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     for aim in round2_aim:
         sleep(0.5+random.random()/2)
@@ -162,17 +162,18 @@ def battle():
             print("Yes")
             break
         else:
-            print("No")
+            print("No",end="")
             sleep(random.randint(1,3)+random.random())
     sleep(5)
     uts.restart()
 
 if __name__ == '__main__':
     import sys
-    loop_num = 5 # int(sys.argv[1])
+    loop_num =  int(sys.argv[1])
     sleep(3+abs(random.normalvariate(0.1,  0.2)))
     t = time()
     for i in range(loop_num):
+        uts.checkload(uts.check_restart, "check start")
         battle()
 
 

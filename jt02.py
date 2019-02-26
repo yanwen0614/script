@@ -89,7 +89,7 @@ def battle():
     print("round 1")
 
     sleep(2.431+abs(random.normalvariate(0.2, 0.1)))
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     clicklocoal_commd()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
@@ -150,7 +150,7 @@ def battle():
     else:
         print("supplied")
 
-    uts.plainTask()
+    uts.planTask()
     
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(round1_aim[0])

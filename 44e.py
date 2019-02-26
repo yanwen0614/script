@@ -51,7 +51,7 @@ def battle():
     sleep(5+2*random.random())
 
     clickairport()
-    uts.plainTask()
+    uts.planTask()
     sleep(0.5+random.random()/2)
     uts.click_aim(round_aim[0],maxr=60)
     sleep(0.5+random.random()/2)

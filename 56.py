@@ -33,18 +33,10 @@ def battle():
     sleep(1+random.random())
     uts.checkamry()
 
-    sroll_y = 800
-    while sroll_y > 0:  
-        x = random.normalvariate(1300, 100)
-        y = random.normalvariate(150, 30)
-        pyautogui.moveTo(x, y, duration=0.25)
-        dx = random.normalvariate(100, 20)
-        dy = random.normalvariate(500, 50)
-        pyautogui.dragRel(-dx,dy,duration=1+random.random())
-        sroll_y -= dy
+    uts.scroll_y(800)
 
     clickairport()
-    sleep(1+random.random())
+    sleep(0.32+random.random()/3)
     uts.checkamry()
     uts.start_mission()
     sleep(3+2*random.random())
@@ -56,33 +48,29 @@ def battle():
         sleep(0.1)
 
     clickairport()
-    uts.plainTask()
-    sleep(0.5+random.random()/2)
+    uts.planTask()
+    sleep(0.34+random.random()/3)
     uts.click_aim(round_aim[0])
-    sleep(0.5+random.random()/2)
+    sleep(0.281+abs(random.normalvariate(0.1, 0.07)))
     uts.click_aim(round_aim[1])
-    sleep(0.5+random.random()/2)
+    sleep(0.281+abs(random.normalvariate(0.1, 0.07)))
 
     uts.click_aim(round_aim[2],maxr=30)
-    sleep(0.5+random.random()/2)
-    uts.click_aim(round_aim[3],maxr=90)
-    sleep(1+random.random()/2)
+    sleep(0.281+abs(random.normalvariate(0.1, 0.07)))
+    uts.click_aim(round_aim[3],maxr=60)
+    sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
 
     uts.start_plain()
     print("start_plain")
     radnum = abs(random.normalvariate(0,1))
-    print("radnum",radnum)
-    if radnum>3.5:
-        sleep(180+abs(random.normalvariate(10, 5)))
-    elif radnum>2:
-        sleep(150+abs(random.normalvariate(10, 5)))
-    elif radnum>1:
-        sleep(90+abs(random.normalvariate(10, 5)))
-    else:
-        sleep(60+abs(random.normalvariate(10, 5)))
+
+    uts.checkload(lambda : uts.PlanEnd((572,192)),"判断是否到计划终点",40)
+
     print("end mission")
     uts.start_mission() # end mission
     sleep(12+random.normalvariate(3, 1))
+
+
     print("end mission  click")
     for i in range(4):
         uts.end_click()
@@ -111,5 +99,5 @@ def main():
 
 if __name__ == '__main__':
     t = time()
-    autobattle(8)
+    autobattle(10)
     print(time()-t)

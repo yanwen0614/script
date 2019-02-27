@@ -22,7 +22,7 @@ def clicklocoal_commd():
 
 def entry34e():
     uts.select_battle(4)
-    sleep(1+random.random())
+    sleep(0.5+random.random()/2)
     uts.entry_mission()
 
 
@@ -31,20 +31,16 @@ def battle():
     sleep(5+random.random())
 
     clicklocoal_commd()
-    sleep(1+random.random())
+    sleep(0.5+random.random()/2)
     uts.checkamry()
-
+    sleep(0.5+random.random()/2)
     clickairport()
-    sleep(1+random.random())
+    sleep(0.5+random.random()/2)
     uts.checkamry()
     uts.start_mission()
     sleep(3+2*random.random())
 
-    isload = False
-    while not isload:
-        isload = uts.checkisload()
-        print("supplying")
-        sleep(0.3)
+    uts.checkload(uts.checkisload, "supplying")
 
     clickairport()
     uts.planTask()
@@ -59,7 +55,7 @@ def battle():
     uts.click_aim(round_aim[2],maxr=40)
     sleep(0.5+random.random()/2)
     uts.click_aim(round_aim[3],maxr=50)
-    sleep(1+random.random()/2)
+    sleep(0.5+random.random()/2/2)
 
     uts.start_plain()
     print("start_plain")
@@ -70,21 +66,7 @@ def battle():
     print("end mission  click")
     for i in range(4):
         uts.end_click()
-        sleep(1.5+random.normalvariate(5, 2)/5)
-
-
-def roundgap():
-    num = 0
-    is_return = False
-    while not is_return:
-        num+=1
-        if num>10:
-            uts.start_mission() # end mission
-        is_return = uts.is_returnbattlemeun()
-        print("ending_screen")
-        uts.end_click()
-        sleep(0.3)
-    sleep(1.5)
+        sleep(0.42+random.normalvariate(0.3, 0.1))
 
 
 def autobattle(num):
@@ -92,7 +74,7 @@ def autobattle(num):
     for i in range(num):
         print(i+1,"turn")
         battle()
-        roundgap()
+        sleep(3+random.normalvariate(3, 1))
 
 
 def main():

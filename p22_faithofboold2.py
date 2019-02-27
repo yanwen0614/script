@@ -173,7 +173,7 @@ if __name__ == '__main__':
     sleep(3+abs(random.normalvariate(0.1,  0.2)))
     t = time()
     for i in range(loop_num):
-        uts.checkload(uts.check_restart, "check start")
+        uts.checkload(uts.check_start, "check start")
         battle()
 
 

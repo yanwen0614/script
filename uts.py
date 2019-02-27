@@ -92,16 +92,25 @@ def select_battle(battle_num):
         randomclick(local)
 
 
-def fairy(aim_cenrtel):
+def fairy(aim_cenrtel,isselected=True):
+    """对于战斗妖精 点击一次释放 前后已加延时"""
     #pyautogui.moveTo(random_cyclic(aim_cenrtel, maxr=30))
     #pyautogui.click()
-    sleep(0.5+random.random()/2)
+    sleep(0.3+random.random()/4)
     local = (1730,580,123,43)
     randomclick(local)
-    sleep(0.5+random.random()/2)
+    sleep(0.3+random.random()/4)
     #pyautogui.moveTo(random_cyclic(aim_cenrtel, maxr=30))
     #pyautogui.click()
-    sleep(0.5+random.random()/2)
+
+def End_mission():
+    """退出整个战役 """
+    start_mission() # end mission
+    sleep(12+random.normalvariate(3, 1))
+    print("end mission  click")
+    for i in range(4):
+        end_click()
+        sleep(0.42+random.normalvariate(0.3, 0.1))
 
 
 def end_click():
@@ -236,7 +245,8 @@ def check_into_amry_editor():
         return True
     return False
 
-def check_restart():
+def check_start():
+    """检测是否到预备作战画面，即进入战役但未下梯队 """
     photo = "startbattle.bmp"
     x = pyautogui.locateOnScreen(photo)
     if x:

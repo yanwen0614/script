@@ -103,7 +103,7 @@ def autobattle(loop_num):
     sleep(2)
     for i in range(loop_num):
         print(i+1, "turn")
-        uts.checkload(uts.check_restart, "check start")
+        uts.checkload(uts.check_start, "check start")
         battle()
         sleep(2+abs(random.normalvariate(2, 2)/5))
 

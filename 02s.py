@@ -64,7 +64,7 @@ def change_battler(battle_num,  start):
     use_preset = [1515, 860, 320, 125]
     uts.randomclick(use_preset)
     if start:
-        uts.randomclick([863, 590, 60, 60])
+        uts.randomclick([863, 590, 60, 60],sg=2)
         start = 0
     uts.randomclick(use_preset)
     sleep(0.8+abs(random.normalvariate(1,  0.2)))
@@ -147,10 +147,12 @@ def battle(start, battle_num,fairy_state,nodelay):
     uts.supply(clickairport)
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     isload = False
+    print("supplying",end="")
     while not isload:
         isload = uts.checkisload()
-        print("supplying")
+        print(".",end="")
         sleep(0.3)
+    print(".")
     #uts.army_back(clickairport, isselect=True)
     print("round 1")
 
@@ -163,7 +165,7 @@ def battle(start, battle_num,fairy_state,nodelay):
 
     sleep(0.631+abs(random.normalvariate(0.2, 0.1)))
 
-    uts.plainTask()
+    uts.planTask()
 
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     clicklocoal_commd()
@@ -186,17 +188,18 @@ def battle(start, battle_num,fairy_state,nodelay):
     sleep(0.5+random.random()/2)
     uts.start_plain()   
 
-    basic_delay = 110+random.normalvariate(5, 10)
+    basic_delay = 90+random.normalvariate(5, 10)
     print("basic_delay",basic_delay)
     sleep(basic_delay)
     print("judge round1end...")
     while 1:
         if round1end():
-            print("Yes")
+            print("Yes",end="")
             break
         else:
-            print("No")
+            print("No",end="")
             sleep(random.randint(1,3)+random.random())
+    print()
 
     radnum = random.random()
     print("radnum_round1",radnum)
@@ -231,14 +234,14 @@ def battle(start, battle_num,fairy_state,nodelay):
     sleep(random.randint(1,3)+random.random()) 
     
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     for aim in round2_aim:
         sleep(0.5+random.random()/2)
         uts.click_aim(aim)
     uts.start_plain()
     print("start plain")
-    basic_delay =60+abs(random.normalvariate(5, 2))
+    basic_delay =45+abs(random.normalvariate(5, 2))
     print("basic_delay",basic_delay)
     sleep(basic_delay)
 
@@ -248,7 +251,7 @@ def battle(start, battle_num,fairy_state,nodelay):
             print("Yes")
             break
         else:
-            print("No")
+            print("No",end="")
             sleep(random.randint(1,3)+random.random())
 
     radnum = random.random()    

@@ -159,7 +159,7 @@ def battle(battle_num):
     uts.army_back(clicklocoal_commd__,isselect=True)
     sleep(1.431+abs(random.normalvariate(0.2, 0.1)))
 
-    uts.plainTask()
+    uts.planTask()
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     clickairport()
     for aim in go_aim:
@@ -169,7 +169,7 @@ def battle(battle_num):
     sleep(65+abs(random.normalvariate(20, 10)))
     while 1:
         first_no = True
-        if uts.planend(pos=(651,519)):
+        if uts.PlanEnd(pos=(651,519)):
             print("Yes")
             break
         else:
@@ -202,12 +202,12 @@ def autobattle(num,battler):
 
 if __name__ == '__main__':
     import sys
-    loop_num= int(sys.argv[1])
-    battler = int(sys.argv[2])
+    loop_num= int(sys.argv[2])
+    battler = int(sys.argv[1])
     t = time()
     battler = autobattle(loop_num,battler)
 
-
+    
     quit2battle = [90,40,170,115]
     uts.randomclick(quit2battle)
     sleep(3+abs(random.normalvariate(0.1,  0.2)))

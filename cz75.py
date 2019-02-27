@@ -41,7 +41,7 @@ def round2end():
 
 def battle():
 
-    uts.checkload(uts.check_restart, "check start")
+    uts.checkload(uts.check_start, "check start")
     sleep(0.5+abs(random.normalvariate(0.3,  0.1)))
     clicklocoal_commd()
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))

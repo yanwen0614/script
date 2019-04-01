@@ -93,7 +93,8 @@ def battle():
     sleep(1.5+random.random()/2)
 
 
-    
+    if random.random()>0.9:
+        sleep(30+abs(random.normalvariate(20,30)))
     print("restart mission")
     uts.restart()  # restart mission
 
@@ -104,6 +105,7 @@ def autobattle(loop_num):
     for i in range(loop_num):
         print(i+1, "turn")
         uts.checkload(uts.check_start, "check start")
+        sleep(1+abs(random.normalvariate(2, 2)/5))
         battle()
         sleep(2+abs(random.normalvariate(2, 2)/5))
 
@@ -112,11 +114,13 @@ def autobattle(loop_num):
 if __name__ == '__main__':
     import sys
     
-    loop_num =  int(sys.argv[1])
+    #loop_num =  int(sys.argv[1])
     
     t = time()
-    #entry46()
-    autobattle(loop_num)
+    for i in range(8):
+        num = random.randint(50,80)
+        autobattle(num)
+        sleep(200+abs(random.normalvariate(50, 20)))
     print(time()-t)
     print(datetime.now())
     if random.random()>0.0:

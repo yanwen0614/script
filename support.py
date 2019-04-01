@@ -3,6 +3,7 @@ import uts
 import random
 from time import sleep, time
 from datetime import datetime
+from sys import stdout 
 
 points = [(193,590),(466,603)]
 color = 16777215
@@ -22,6 +23,7 @@ def check_main_frame():
     while uts.get_color((155,69)) != color:
         print(".",end="")
         sleep(0.5)
+        stdout.flush()
     print("")
     print("checked!")
         
@@ -45,14 +47,18 @@ def auto_support(gap_min):
     tag = 1
     while tag:
         sleeptime = gap_min*60+abs(random.normalvariate(gap_min*8,gap_min*5))
-        
+        randompara = abs(random.normalvariate(1,0.2))
+        sleeptime=randompara*sleeptime
+        stdout.write("\r")
         for i in range(4):
             if reorder_support():
                 check_main_frame()
-        print(tag)
-        print(sleeptime)
+        stdout.write("\t".join([str(tag), str(sleeptime),]))
+        stdout.flush()
+        
+
         tag+=1
         sleep(sleeptime)
 
 if __name__ == "__main__":
-    auto_support(0.6)
+    auto_support(1)

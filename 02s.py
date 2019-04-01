@@ -3,6 +3,7 @@ import uts
 import random
 from time import sleep,time
 from datetime import datetime
+from support import auto_support
 pyautogui.FAILSAFE = True
 locoal_commd = [1005, 540]
 airport = [450,525]
@@ -134,10 +135,10 @@ def mistake(error_coor, correct_coor):
         uts.click_aim(error_coor)
 
 
-def battle(start, battle_num,fairy_state,nodelay):
+def battle(start, battle_num, fairy_state, nodelay):
     entry02()
-    sleep(5+random.random())
-
+    sleep(1+random.random())
+    uts.checkload(uts.check_start, "check into battle", 4)
     start = change_battler(battle_num, start)
 
     sleep(1+random.random())
@@ -146,13 +147,8 @@ def battle(start, battle_num,fairy_state,nodelay):
 
     uts.supply(clickairport)
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
-    isload = False
-    print("supplying",end="")
-    while not isload:
-        isload = uts.checkisload()
-        print(".",end="")
-        sleep(0.3)
-    print(".")
+    uts.checkload(uts.checkisload, "supplying", 0.5)
+
     #uts.army_back(clickairport, isselect=True)
     print("round 1")
 
@@ -167,20 +163,20 @@ def battle(start, battle_num,fairy_state,nodelay):
 
     uts.planTask()
 
-    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
     clicklocoal_commd()
-    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
     
     mistake(round1_error[0],round1_aim[0])
-    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
     issroll = 0
     for step,aim in enumerate(round1_aim):
-        sleep(0.5+random.random()/2)
+        sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
         if step ==3:
             mistake(round1_error[1],aim)
-            sleep(0.5+random.random()/2)
+            sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
         uts.click_aim(aim)
-        sleep(0.5+random.random()/2)
+        sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
         if step ==0:
             uts.scroll_y(800)
 
@@ -231,11 +227,11 @@ def battle(start, battle_num,fairy_state,nodelay):
             sleep(random.randint(1,3)+random.random())
     # round 2
     print("round 2")
-    sleep(random.randint(1,3)+random.random()) 
+    sleep(2+random.randint(1,3)+random.random()) 
     
-    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
     uts.planTask()
-    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
     for aim in round2_aim:
         sleep(0.5+random.random()/2)
         uts.click_aim(aim)
@@ -316,14 +312,16 @@ if __name__ == '__main__':
     start, battler_num, loop_num = int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
     print("start,battle_num:", start, battler_num, sep=",") 
     t = time()
-    fairy_state,nodelay = 0.0,1
-    battler_num, start = autobattle(loop_num, start, battler_num,fairy_state,nodelay)
+    fairy_state, nodelay = 0.0, 1
+    battler_num, start = autobattle(loop_num, start, battler_num, fairy_state, nodelay)
     print(time()-t)
     print(datetime.now())
     print("start,battle_num:", start, battler_num, sep=",") 
     if random.random()>0.0:
         quit2battle = [90,40,170,115]
         uts.randomclick(quit2battle)
+    sleep(10)
+    auto_support(0.6)
 
 """127.0.0.1		    localhost
 204.246.56.80 adr.transit.gf.ppgame.com

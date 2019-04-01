@@ -20,7 +20,6 @@ def clicklocoal_commd():
     pyautogui.moveTo(*uts.random_cyclic(locoal_commd, maxr=50))
     pyautogui.click()
 
-
 def roundend(pos):
     x = uts.get_color(pos=pos)
     if x != 13360495:

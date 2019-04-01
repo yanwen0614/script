@@ -85,7 +85,7 @@ def change_battler(battle_num):
     sleep(0.7+abs(random.normalvariate(0.3,  0.1)))
     #点入打手队
 
-    doll2 = [295+260,200,227,801] # 260为相邻人形的水平位移
+    doll2 = [295+260,200,227,801-175] # 260为相邻人形的水平位移
     uts.randomclick(doll2)
     sleep(1+abs(random.normalvariate(0.6,  0.2)))
     # 选择第二个人形

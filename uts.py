@@ -180,10 +180,9 @@ def main():
         sleep(1)
 
 def get_color(pos=(1656,923)): #50175  25731  57855
-
-    hdc_screen = win32gui.CreateDC("DISPLAY", "", None)
-    c = win32gui.GetPixel(hdc_screen,*pos)
-    del hdc_screen
+    #hwnd = win32gui.GetDesktopWindow()
+    dc = win32gui.GetDC(0)
+    c = win32gui.GetPixel(dc,*pos)
     return c
 
 def planTask(max_try=10):
@@ -192,7 +191,7 @@ def planTask(max_try=10):
     for i in range(max_try):
         randomclick(local,sg=3)
         sleep(0.2)
-        if get_color((261,879)) == 46847 and get_color((281,882)) == 46847:
+        if get_color((261,879)) == 177918 and get_color((281,882)) == 111869:
             break
 
 def checkinbattle():
@@ -276,7 +275,14 @@ def not_force_replace():
         return True
     return False
 
-def supply(clickfuntion):
+def supply(clickfuntion_or_coor,isselect=False):
+    if isinstance(clickfuntion_or_coor,tuple):
+        clickfuntion = lambda : click_aim(clickfuntion_or_coor)
+    else:
+        clickfuntion = clickfuntion_or_coor
+    if not isselect:
+        clickfuntion()
+        sleep(0.2+abs(random.normalvariate(0.2, 0.1)))
     clickfuntion()
     sleep(0.2+abs(random.normalvariate(0.2, 0.1)))
     clickfuntion()
@@ -310,7 +316,7 @@ def army_back(clickfuntion_or_coor,isselect=False):
 
 def checkisload(): 
     x = get_color(pos=(1656,923))
-    if x != 58111:
+    if x != 254205:
         return False
     return True
 
@@ -353,6 +359,11 @@ def scroll_x(sroll_dx):
         pyautogui.dragRel(-dx,dy,duration=1+random.random())
         sroll_x -= abs(dx)
 
+def fairy_switch():
+    print("fairy_switch")
+    switch = [1733,313,117,53]
+    randomclick(switch)
+
 def EmeryTurnFunc(sleeptime = 6):
     """敌方回合调用函数，用于处理自动遇敌等问题"""
     def emeryroundend():
@@ -367,10 +378,12 @@ def EmeryTurnFunc(sleeptime = 6):
             print("Yes")
             break
         if checkinbattle():
+            print("in_battle")
             sleep(0.3)
             while checkinbattle():
                 sleep(0.3)
             else:
+                print("out_battle")
                 sleep(2)
                 for i in range(4):
                     sleep(0.5)
@@ -380,7 +393,7 @@ def EmeryTurnFunc(sleeptime = 6):
                     pyautogui.click()
                     sleep((0.383+abs(random.normalvariate(0.2, 0.1))))
         sleep(0.3)
-    sleep(3.5)
+    sleep(7.5)
 
 if __name__ == '__main__':
     get_color()

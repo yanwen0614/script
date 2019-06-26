@@ -3,16 +3,11 @@ import uts
 import random
 from time import sleep,time
 from datetime import datetime
-from support import auto_support
 pyautogui.FAILSAFE = True
-locoal_commd = [1005, 540]
-airport = [450,525]
+locoal_commd = [1372, 787]
+airport = [560,770]
 
-
-round1_aim = [(783,402), (834,818), (1023,532), (816,398)]
-round1_error = [(1225,323),(1230,670)]
-round2_aim = [(816,398),(1220,395), (1480,450)]
-
+aim = [(1097, 602), (2061, 666)]
 
 def clickairport():
     pyautogui.moveTo(*uts.random_cyclic(airport, maxr=50))
@@ -35,42 +30,43 @@ def change_battler(battle_num,  start):
     sleep(1+random.random())
     uts.amry_editor()
     while 1:
-        sleep(0.3)
+        sleep(0.5)
         print("check_into_amry_editor")
         if uts.check_into_amry_editor():
             break
-    sleep(0.5+abs(random.normalvariate(0.3,  0.1)))
-    army_label = [90, 191, 160, 90]
+    sleep(1+abs(random.normalvariate(0.3,  0.1)))
+    army_label = [1, 280, 228, 120]
     if battle_num%2 == 0:
-        army_label[1]+=125
+        army_label[1]+=180
         uts.randomclick(army_label)
         sleep(0.5+abs(random.normalvariate(0.3,  0.1)))
 
-    formation_editor =  [1618, 911, 240, 70]
-    uts.randomclick(formation_editor)
-    sleep(0.8+abs(random.normalvariate(1,  0.2)))
 
-    formation_preset = [1785 , 365,  95,  110]
+    formation_editor =  [2265, 1345, 400, 120]
+    uts.randomclick(formation_editor)
+    sleep(0.3+abs(random.normalvariate(1,  0.2)))
+
+    formation_preset = [2540 , 525,  130,  175]
     uts.randomclick(formation_preset)
     sleep(0.3+abs(random.normalvariate(1,  0.2)))
 
-    pre_formation = [1110, 65, 720, 140]
+    pre_formation = [1520, 100, 1090, 220]
     if battle_num==1:
         uts.randomclick(pre_formation)
     else:
-        pre_formation[1]+=175
+        pre_formation[1]+=250
         uts.randomclick(pre_formation)
-    sleep(0.8+abs(random.normalvariate(1,  0.2)))
+    sleep(0.4+abs(random.normalvariate(1,  0.2)))
 
-    use_preset = [1515, 860, 320, 125]
+    use_preset = [2120, 1280, 470, 180]
     uts.randomclick(use_preset)
     if start:
-        uts.randomclick([863, 590, 60, 60],sg=2)
+        uts.randomclick([1135, 875, 80, 80])
         start = 0
     uts.randomclick(use_preset)
-    sleep(0.8+abs(random.normalvariate(1,  0.2)))
+    sleep(0.3+abs(random.normalvariate(1,  0.2)))
 
-    sure = [1605, 855, 225, 140]
+    sure = [2255, 1255, 340, 190]
     uts.randomclick(sure)
     sleep(0.431+abs(random.normalvariate(0.2,  0.1)))
     while 1:
@@ -79,7 +75,7 @@ def change_battler(battle_num,  start):
             break
 
 
-    quit2battle = [90, 40, 170, 115]
+    quit2battle = [20, 70, 240, 140]
     uts.randomclick(quit2battle)
     sleep(3+abs(random.normalvariate(0.1,  0.2)))
 
@@ -109,15 +105,15 @@ def change_battler(battle_num,  start):
 
 
 def round1end():
-    x = uts.get_color(pos=(940, 265))
-    if x != 13360495:
+    x = uts.get_color(pos=(1180, 402))
+    if x != 13426032:
         return False
     return True
 
 
-def round2end():
-    x = uts.get_color(pos=(1592, 314))
-    if x != 13360495:
+def roundend():
+    x = uts.get_color(pos=(2173, 483))
+    if x != 13492079:
         return False
     return True
 
@@ -126,7 +122,7 @@ def mistake(error_coor, correct_coor):
     """ 
     para: error_coor,correct_coor
     """
-    if random.random()>random.normalvariate(0.96, 0.05):
+    if random.random()>random.normalvariate(0.80, 0.05):
         print("mistake")
         uts.click_aim(error_coor)
         sleep(0.456+abs(random.normalvariate(0.2, 0.1)))
@@ -135,9 +131,9 @@ def mistake(error_coor, correct_coor):
         uts.click_aim(error_coor)
 
 
-def battle(start, battle_num, fairy_state, nodelay):
+def battle(start, battle_num):
     entry02()
-    sleep(1+random.random())
+    sleep(5+random.random())
     uts.checkload(uts.check_start, "check into battle", 4)
     start = change_battler(battle_num, start)
 
@@ -149,121 +145,54 @@ def battle(start, battle_num, fairy_state, nodelay):
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     uts.checkload(uts.checkisload, "supplying", 0.5)
 
-    #uts.army_back(clickairport, isselect=True)
+
     print("round 1")
 
-    """
-    if (battle_num ==0 or fairy_state == 0) or (battle_num ==1 or fairy_state == 1):
-        fairy_state = (fairy_state+1)%2
-        uts.fairy(locoal_commd)
-        sleep(0.656+abs(random.normalvariate(0.2, 0.1)))
-    """
-
-    sleep(0.631+abs(random.normalvariate(0.2, 0.1)))
-
-    uts.planTask()
-
-    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
+    # if random.random()>0.35:
+    #     if battle_num == 0:
+    #         uts.fair(locoal_commd)
+    #         sleep(0.456+abs(random.normalvariate(0.2, 0.1)))
+    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     clicklocoal_commd()
-    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
-    
-    mistake(round1_error[0],round1_aim[0])
-    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
-    issroll = 0
-    for step,aim in enumerate(round1_aim):
-        sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
-        if step ==3:
-            mistake(round1_error[1],aim)
-            sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
-        uts.click_aim(aim)
-        sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
-        if step ==0:
-            uts.scroll_y(800)
 
-
-    sleep(0.5+random.random()/2)
-    uts.start_plan()   
-
-    basic_delay = 90+random.normalvariate(5, 10)
-    print("basic_delay",basic_delay)
-    sleep(basic_delay)
-    print("judge round1end...")
-    while 1:
-        if round1end():
-            print("Yes",end="")
-            break
-        else:
-            print("No",end="")
-            sleep(random.randint(1,3)+random.random())
-    print()
-
-    radnum = random.random()
-    print("radnum_round1",radnum)
-   
-    delaytime = 0
-    if nodelay:
-        radnum = 0
-    if radnum >0.999:
-        delaytime = 180+abs(random.normalvariate(20, 80))
-    elif radnum >0.9848:
-        delaytime = 60+abs(random.normalvariate(20, 40))
-    elif radnum >0.91354:
-        delaytime = 40+abs(random.normalvariate(15, 20))
-    elif radnum >0.85:
-        delaytime = 20+abs(random.normalvariate(10, 10))
-        
-
-    print("sleep ",delaytime)
-    sleep(delaytime)
-
-    uts.start_mission() # end mission
-
-    print("emeary turn")
-    sleep(15+abs(random.normalvariate(0, 2)))
-    while 1:
-        if round1end():
-            break
-        else:
-            sleep(random.randint(1,3)+random.random())
-    # round 2
-    print("round 2")
-    sleep(2+random.randint(1,3)+random.random()) 
-    
-    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
+    sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     uts.planTask()
-    sleep(0.416+abs(random.normalvariate(0.2, 0.1)))
-    for aim in round2_aim:
-        sleep(0.5+random.random()/2)
-        uts.click_aim(aim)
+
+    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+    uts.scroll_y(1200)
+    sleep(2+abs(random.normalvariate(0.2, 0.1)))
+    uts.click_aim(aim[0])
+    sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
+    uts.click_aim(aim[1])
+
+    sleep(1+random.random()/2)
     uts.start_plan()
-    print("start plain")
-    basic_delay =45+abs(random.normalvariate(5, 2))
+
+    basic_delay = 180+random.normalvariate(5, 10)
     print("basic_delay",basic_delay)
     sleep(basic_delay)
-
-    print("judge round2end...")
+    print("judge round end...")
     while 1:
-        if round2end():
+        if roundend():
             print("Yes")
             break
         else:
-            print("No",end="")
+            print("No")
             sleep(random.randint(1,3)+random.random())
 
     radnum = random.random()    
-    print("radnum_round2",radnum)
+    print("radnum_round",radnum)
    
     delaytime = 0
-    if nodelay:
-        radnum = 0
+    
     if radnum >0.99:
-        delaytime = 180+abs(random.normalvariate(20, 80))
+        delaytime = 60+abs(random.normalvariate(20, 80))
     elif radnum >0.9648:
-        delaytime = 60+abs(random.normalvariate(20, 40))
+        delaytime = 30+abs(random.normalvariate(20, 40))
     elif radnum >0.88354:
-        delaytime = 40+abs(random.normalvariate(15, 20))
+        delaytime = 15+abs(random.normalvariate(15, 20))
     elif radnum >0.85:
-        delaytime = 20+abs(random.normalvariate(10, 10))
+        delaytime = 5+abs(random.normalvariate(10, 10))
     
     print("sleep ", delaytime)
     sleep(delaytime)
@@ -274,9 +203,7 @@ def battle(start, battle_num, fairy_state, nodelay):
     for i in range(4):
         uts.end_click()
         sleep(0.5+abs(random.normalvariate(2, 2)/5))
-    return start, battle_num,fairy_state
-
-
+    return start, battle_num
 
 
 def roundgap():
@@ -295,15 +222,15 @@ def roundgap():
     sleep(1.5+abs(random.normalvariate(2, 5)))
 
 
-def autobattle(num, start, battle_num,fairy_state,nodelay ):
+def autobattle(num, start, battle_num ):
     sleep(2)
     for i in range(num):
         print(i+1, "turn")
-        start, battle_num,fairy_state = battle(start, battle_num,fairy_state,nodelay)
-        sleep(1+abs(random.normalvariate(2, 2)/5))
+        start, battle_num = battle(start, battle_num)
+        sleep(1+random.normalvariate(2, 2)/5)
         roundgap()
         battle_num += 1
-        battle_num = battle_num % 2  
+        battle_num = battle_num % 2
     return battle_num, start
 
 
@@ -312,17 +239,10 @@ if __name__ == '__main__':
     start, battler_num, loop_num = int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
     print("start,battle_num:", start, battler_num, sep=",") 
     t = time()
-    fairy_state, nodelay = 0.0, 1
-    battler_num, start = autobattle(loop_num, start, battler_num, fairy_state, nodelay)
+    battler_num, start = autobattle(loop_num, start, battler_num)
     print(time()-t)
     print(datetime.now())
     print("start,battle_num:", start, battler_num, sep=",") 
-    if random.random()>0.0:
+    if random.random()>0.4:
         quit2battle = [90,40,170,115]
         uts.randomclick(quit2battle)
-    sleep(10)
-    auto_support(0.6)
-
-"""127.0.0.1		    localhost
-204.246.56.80 adr.transit.gf.ppgame.com
-218.11.1.163 ios.transit.gf.ppgame.com"""

@@ -123,7 +123,7 @@ def battle():
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(round2_aim[2])
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
-    uts.start_plain()
+    uts.start_plan()
     sleep(10)
 
     while 1:
@@ -178,7 +178,7 @@ def battle():
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(round3_aim[3])
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
-    uts.start_plain()
+    uts.start_plan()
     sleep(20)
     while 1:
         print("check_out_plan")

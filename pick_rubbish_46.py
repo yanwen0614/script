@@ -69,7 +69,7 @@ def battle():
             uts.click_aim(aim)
         sleep(0.4+random.random()/2)
 
-    uts.start_plain()   
+    uts.start_plan()   
     sleep(6)
     tag = 0
     while 1:

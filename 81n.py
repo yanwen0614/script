@@ -3,25 +3,26 @@ import uts
 import random
 from time import sleep, time
 from datetime import datetime
+from sys import stdout
 pyautogui.FAILSAFE = True
-locoal_commd = [329, 826]  #[1315,660,225,60    ]
-locoal_commd_after_scroll = [330,936]
-airport = [415,200]
+locoal_commd = [340, 826]  #[1315,660,225,60    ]
+locoal_commd_after_scroll = [340,936]
+airport = [425,200]
 
-go_aim = [(536,392),(281,444),(301,707),(527,545),(498,768)]
+go_aim = [(290,444),(510,768)]
 
 
 def clickairport():
-    pyautogui.moveTo(*uts.random_cyclic(airport, maxr=50))
+    pyautogui.moveTo(*uts.random_cyclic(airport, maxr=30))
     pyautogui.click()
 
 
 def clicklocoal_commd(locoal_commd=locoal_commd):
-    pyautogui.moveTo(*uts.random_cyclic(locoal_commd, maxr=50))
+    pyautogui.moveTo(*uts.random_cyclic(locoal_commd, maxr=30))
     pyautogui.click()
 
 def clicklocoal_commd__(locoal_commd=locoal_commd_after_scroll):
-    pyautogui.moveTo(*uts.random_cyclic(locoal_commd, maxr=50))
+    pyautogui.moveTo(*uts.random_cyclic(locoal_commd, maxr=30))
     pyautogui.click()
 
 
@@ -32,11 +33,6 @@ def entry01():
     uts.entry_mission()
 
 
-def emeryroundend():
-    x = uts.get_color(pos=(1525,950))
-    if x != 436990:
-        return False
-    return True
 
 
 def change_battler(battle_num):
@@ -77,6 +73,7 @@ def change_battler(battle_num):
         print("check_into_amry_editor")
         if uts.check_into_amry_editor():
             break
+        stdout.flush()
     # 
 
     army_label = [90, 191, 160, 90]
@@ -99,7 +96,7 @@ def change_battler(battle_num):
         print("check_into_amry_editor")
         if uts.check_into_amry_editor():
             break
-    
+    stdout.flush()
     quit2battle = [90, 40, 170, 115]
     uts.randomclick(quit2battle)
     sleep(3+abs(random.normalvariate(0.1,  0.2)))
@@ -108,9 +105,28 @@ def change_battler(battle_num):
 
 def battle(battle_num):
     
+    isload = False
+    print("check_start",end="")
+    while not isload:
+        isload = uts.check_start()
+        print(".",end="")
+        sleep(0.3)
+        stdout.flush()
+    print(".")
+    stdout.flush()
+    
     sleep(3+2*random.random())
 
     change_battler(battle_num)
+
+    isload = False
+    print("check_start_after_change_battler",end="")
+    while not isload:
+        isload = uts.check_start()
+        print(".",end="")
+        sleep(0.3)
+        stdout.flush()
+    print(".")
 
     clicklocoal_commd()
     sleep(0.631+abs(random.normalvariate(0.2, 0.1)))
@@ -139,11 +155,13 @@ def battle(battle_num):
     uts.start_mission()
     sleep(5.431+abs(random.normalvariate(0.2, 0.1)))
     isload = False
+    print("load..")
     while not isload:
         isload = uts.checkisload()
-        print("loading")
+        print(".",end="")
         sleep(0.3)
-
+        stdout.flush()
+    stdout.flush()
     uts.supply(clicklocoal_commd__)
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     
@@ -153,8 +171,9 @@ def battle(battle_num):
         isload = uts.checkisload()
         print(".",end="")
         sleep(0.3)
+        stdout.flush()
     print(".")
-
+    stdout.flush()
 
     uts.army_back(clicklocoal_commd__,isselect=True)
     sleep(1.431+abs(random.normalvariate(0.2, 0.1)))
@@ -165,7 +184,7 @@ def battle(battle_num):
     for aim in go_aim:
         sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
         uts.click_aim(aim, maxr=30)
-    uts.start_plain()
+    uts.start_plan()
     sleep(65+abs(random.normalvariate(20, 10)))
     while 1:
         first_no = True
@@ -177,7 +196,8 @@ def battle(battle_num):
                 print("No",end="")
             else:
                 print(".",end="")
-            sleep(random.randint(1,3)+random.random())
+        stdout.flush()
+        sleep(random.randint(1,3)+random.random())
     print(".")
     uts.restart()  # restart mission
 
@@ -194,6 +214,7 @@ def autobattle(num,battler):
         #roundgap()
         battler +=1 
         battler = battler%2
+        print("battler"+"       "+str(battler))
         
     return battler
 

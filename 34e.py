@@ -7,7 +7,7 @@ locoal_commd = [1567, 350]
 airport =   [1090, 520]
 
 
-round_aim = [(875,540), (990,748), (905,404), (810,630)]
+round_aim = [(990,748),(810,630)]
 
 
 def clickairport():
@@ -37,28 +37,28 @@ def battle():
     clickairport()
     sleep(0.5+random.random()/2)
     uts.checkamry()
+    sleep(0.5+random.random()/2)
     uts.start_mission()
     sleep(3+2*random.random())
 
     uts.checkload(uts.checkisload, "supplying")
 
     clickairport()
+    sleep(0.5+random.random()/2)
     uts.planTask()
     sleep(0.5+random.random()/2)
     uts.click_aim(round_aim[0])
     sleep(0.5+random.random()/2)
-    uts.click_aim(round_aim[1])
-    sleep(0.5+random.random()/2)
+
 
     uts.scroll_y(-600)
 
-    uts.click_aim(round_aim[2],maxr=40)
+    uts.click_aim(round_aim[1],maxr=40)
     sleep(0.5+random.random()/2)
-    uts.click_aim(round_aim[3],maxr=50)
-    sleep(0.5+random.random()/2/2)
 
-    uts.start_plain()
-    print("start_plain")
+
+    uts.start_plan()
+    print("start_plan")
     uts.checkload(lambda : uts.PlanEnd((921,488)),"判断是否到计划终点",59)
     print("end mission")
     uts.start_mission() # end mission
@@ -78,7 +78,7 @@ def autobattle(num):
 
 
 def main():
-    autobattle(4)
+    autobattle(14)
 
 if __name__ == '__main__':
     import sys

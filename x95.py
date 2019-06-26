@@ -68,7 +68,7 @@ def battle():
         uts.click_aim(aim,25)
         sleep(0.4+random.random()/2)
 
-    uts.start_plain()   
+    uts.start_plan()   
     sleep(30)
     while 1:
         if uts.checkEndPlan():
@@ -87,7 +87,7 @@ def battle():
         uts.click_aim(aim,25)
         sleep(0.4+random.random()/2)
 
-    uts.start_plain()   
+    uts.start_plan()   
 
     sleep(40)
     while 1:
@@ -106,7 +106,7 @@ def battle():
         uts.click_aim(aim,25)
         sleep(0.4+random.random()/2)
 
-    uts.start_plain()   
+    uts.start_plan()   
     sleep(8)
     while 1:
         if uts.checkEndPlan():

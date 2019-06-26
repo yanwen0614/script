@@ -60,8 +60,8 @@ def battle():
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(round_aim[1])
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
-    uts.start_plain()
-    uts.checkload(lambda : uts.PlanEnd((725,208)),"判断是否到计划终点",16)
+    uts.start_plan()
+    uts.checkload(lambda : uts.PlanEnd((682,217)),"判断是否到计划终点",16)
 
     uts.start_mission() # end mission
     print("emeary turn")
@@ -69,7 +69,7 @@ def battle():
 
     # round 2
     print("round 2")
-    uts.checkload(lambda : uts.PlanEnd((725,208)),"判断回合开始动画是否加载完",3)
+    uts.checkload(lambda : uts.PlanEnd((682,217)),"判断回合开始动画是否加载完",3)
     uts.click_aim(round_aim[1])
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
     uts.fairy(round_aim[1])
@@ -82,8 +82,8 @@ def battle():
     uts.click_aim(round_aim[3],maxr=50)
     sleep(0.5+random.random()/3)
 
-    uts.start_plain()
-    uts.checkload(lambda : uts.PlanEnd((1197,350)),"判断是否到计划终点",15)
+    uts.start_plan()
+    uts.checkload(lambda : uts.PlanEnd((1237,356)),"判断是否到计划终点",15)
     print("end mission")
     sleep(3)
     uts.End_mission()
@@ -98,7 +98,7 @@ def autobattle(num):
 
 
 def main():
-    for i in range(8):
+    for i in range(14):
         num = random.randint(5,8)
         autobattle(num)
         sleep(200+abs(random.normalvariate(50, 20)))

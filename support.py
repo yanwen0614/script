@@ -61,4 +61,4 @@ def auto_support(gap_min):
         sleep(sleeptime)
 
 if __name__ == "__main__":
-    auto_support(1)
+    auto_support(0.8)

@@ -68,7 +68,7 @@ def battle():
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(go_aim[1])
     sleep(0.7+random.random()/2)
-    uts.start_plain()
+    uts.start_plan()
     sleep(55)
     while 1:
         print("check_out_plan")
@@ -84,7 +84,7 @@ def battle():
         sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     
     sleep(0.7+random.random()/2)
-    uts.start_plain()
+    uts.start_plan()
     sleep(5+abs(random.normalvariate(0.7, 1)))
     uts.army_back(clicklocoal_commd)
     sleep(0.7+random.random()/2)

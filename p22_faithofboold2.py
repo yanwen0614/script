@@ -77,7 +77,7 @@ def battle():
         sleep(0.5+random.random()/2)
         uts.click_aim(aim)
     sleep(0.5+random.random()/2)
-    uts.start_plain()   
+    uts.start_plan()   
 
     basic_delay = 25+random.normalvariate(5, 10)
     print("basic_delay",basic_delay)
@@ -102,7 +102,7 @@ def battle():
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
     uts.click_aim(round1_aim_2)
     sleep(0.5+random.random()/2)
-    uts.start_plain()   
+    uts.start_plan()   
     basic_delay = 15+abs(random.normalvariate(5, 10))
     print("basic_delay",basic_delay)
     sleep(basic_delay)
@@ -152,7 +152,7 @@ def battle():
     for aim in round2_aim:
         sleep(0.5+random.random()/2)
         uts.click_aim(aim)
-    uts.start_plain()
+    uts.start_plan()
     
     print("start plain")
     sleep(30)

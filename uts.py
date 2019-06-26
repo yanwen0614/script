@@ -155,7 +155,7 @@ def checkamry(): # 梯队确认
 
 
 
-def start_plain():
+def start_plan():
     local = (1645,900,215,110)
     randomclick(local)
 

@@ -133,7 +133,7 @@ def battle():
     backbtn = [980-240,555-30,225,60]
     uts.randomclick(backbtn)
     sleep(0.583+abs(random.normalvariate(0.2, 0.1)))
-    uts.start_plain()
+    uts.start_plan()
     sleep(65+abs(random.normalvariate(20, 10)))
 
     checkload("checked plan end")
@@ -165,7 +165,7 @@ def battle():
     change_sop_to_battle(locoal_commd__)
 
     checkload(pos = (1194,438))
-
+    sleep(10+abs(random.normalvariate(5, 4)))
     uts.restart()  # restart mission
 
 def checkload(sss="",pos = (657,437)):
@@ -194,7 +194,7 @@ def autobattle(num,):
 
         print(i+1,"turn")
         battle()
-        sleep(2+random.normalvariate(2, 2)/5)
+        sleep(10+abs(random.normalvariate(5, 4)))
         #roundgap()
 
         

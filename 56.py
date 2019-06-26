@@ -60,8 +60,8 @@ def battle():
     uts.click_aim(round_aim[3],maxr=60)
     sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
 
-    uts.start_plain()
-    print("start_plain")
+    uts.start_plan()
+    print("start_plan")
     radnum = abs(random.normalvariate(0,1))
 
     uts.checkload(lambda : uts.PlanEnd((572,192)),"判断是否到计划终点",40)

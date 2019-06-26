@@ -64,7 +64,7 @@ def battle():
         uts.click_aim(aim,maxr=30)
         sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
 
-    uts.start_plain()
+    uts.start_plan()
     uts.checkload(lambda : uts.PlanEnd((1291,400)),"判断是否到计划终点",15)
     print("end mission")
     sleep(3)
@@ -85,7 +85,7 @@ def battle():
     for aim in round3:
         uts.click_aim(aim,maxr=30)
         sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
-    uts.start_plain()
+    uts.start_plan()
     uts.checkload(lambda : uts.PlanEnd((1018,400)),"判断是否到计划终点",45)
 
     uts.start_mission() # end mission
@@ -102,7 +102,7 @@ def battle():
     for aim in round4:
         uts.click_aim(aim,maxr=30)
         sleep(0.431+abs(random.normalvariate(0.2, 0.1)))
-    uts.start_plain()
+    uts.start_plan()
     """
     print("判断是否到计划终点",end="")
     sleep(15)
